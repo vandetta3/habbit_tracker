@@ -74,7 +74,7 @@ const graph = i.graph(
         label: "user",
       },
       reverse: {
-        on: "$users",
+        on: "users",
         has: "many",
         label: "habits",
       },
@@ -98,7 +98,7 @@ const graph = i.graph(
         label: "user",
       },
       reverse: {
-        on: "$users",
+        on: "users",
         has: "many",
         label: "habitCompletions",
       },
@@ -122,7 +122,7 @@ const graph = i.graph(
         label: "user",
       },
       reverse: {
-        on: "$users",
+        on: "users",
         has: "many",
         label: "milestones",
       },
@@ -134,7 +134,7 @@ const graph = i.graph(
         label: "user",
       },
       reverse: {
-        on: "$users",
+        on: "users",
         has: "many",
         label: "todos",
       },
@@ -146,7 +146,7 @@ const graph = i.graph(
         label: "user",
       },
       reverse: {
-        on: "$users",
+        on: "users",
         has: "many",
         label: "notes",
       },
@@ -158,7 +158,7 @@ const graph = i.graph(
         label: "user",
       },
       reverse: {
-        on: "$users",
+        on: "users",
         has: "many",
         label: "dailyQuotes",
       },
