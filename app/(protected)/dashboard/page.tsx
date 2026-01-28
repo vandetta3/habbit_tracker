@@ -35,6 +35,7 @@ export default function DashboardPage() {
 
   const habits = (habitsData?.habits || []) as unknown as (Habit & {
     completions: HabitCompletion[];
+    milestones?: { id: string }[];
   })[];
 
   // Calculate stats
