@@ -5,8 +5,11 @@ import { i } from "@instantdb/react";
 
 const graph = i.graph(
   {
-    // Users are managed by InstantDB auth
-    // No explicit schema needed, but we can reference them
+    // Users entity (managed by InstantDB auth)
+    users: i.entity({
+      email: i.string(),
+      createdAt: i.number(),
+    }),
 
     // Habits
     habits: i.entity({
