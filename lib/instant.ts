@@ -12,7 +12,7 @@ if (!APP_ID) {
 
 export const db = init({
   appId: APP_ID,
-  
+  schema,
 });
 
 // Export types for type safety

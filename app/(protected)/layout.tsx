@@ -6,6 +6,7 @@ import { db } from "@/lib/instant";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { MoreMenu } from "@/components/layout/MoreMenu";
 import { ToastProvider } from "@/components/ui/toast";
 
 export default function ProtectedLayout({
@@ -13,7 +14,7 @@ export default function ProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
   const { isLoading, user } = db.useAuth();
   const router = useRouter();
 
@@ -44,12 +45,13 @@ export default function ProtectedLayout({
     <ToastProvider>
       <div className="h-screen">
         <Sidebar />
-        <MobileNav open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+        <MobileNav onMenuClick={() => setMoreMenuOpen(true)} />
+        <MoreMenu open={moreMenuOpen} onClose={() => setMoreMenuOpen(false)} />
         
         <div className="lg:pl-64">
-          <Topbar onMenuClick={() => setMobileMenuOpen(true)} />
+          <Topbar />
           
-          <main className="py-6">
+          <main className="py-6 pb-24 lg:pb-6">
             <div className="px-4 sm:px-6 lg:px-8">{children}</div>
           </main>
         </div>

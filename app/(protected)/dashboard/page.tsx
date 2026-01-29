@@ -11,7 +11,9 @@ import { useToast } from "@/components/ui/toast";
 import { getTodayString, formatDateForDisplay } from "@/lib/date-utils";
 import { calculateStreak, isHabitCompletedToday } from "@/lib/habits";
 import { getRandomStaticQuote } from "@/lib/quotes";
-import type { Habit, HabitCompletion } from "@/types";
+import type { Habit, HabitCompletion, Expense } from "@/types";
+import { formatCurrency } from "@/lib/expenses";
+import { EXPENSE_CATEGORIES } from "@/lib/constants";
 
 export default function DashboardPage() {
   const { addToast } = useToast();
@@ -29,14 +31,34 @@ export default function DashboardPage() {
         },
       },
       completions: {},
-      milestones: {},
     },
   });
 
   const habits = (habitsData?.habits || []) as unknown as (Habit & {
     completions: HabitCompletion[];
-    milestones?: { id: string }[];
   })[];
+
+  // Query recent expenses
+  const { data: expensesData } = db.useQuery({
+    expenses: {
+      $: {
+        where: {
+          user: user?.id || "",
+        },
+      },
+    },
+  });
+
+  const allExpenses = (expensesData?.expenses || []) as unknown as Expense[];
+  const expenses = allExpenses
+    .filter((e) => !e.deletedAt)
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .slice(0, 5);
+
+  const getCategoryIcon = (category: string): string => {
+    const cat = EXPENSE_CATEGORIES.find((c) => c.value === category);
+    return cat?.icon || "📦";
+  };
 
   // Calculate stats
   const totalHabits = habits.length;
@@ -48,8 +70,8 @@ export default function DashboardPage() {
     return Math.max(max, streak);
   }, 0);
 
-  const totalMilestones = habits.reduce((sum, habit) => {
-    return sum + (habit.milestones?.length || 0);
+  const totalCompletions = habits.reduce((sum, habit) => {
+    return sum + habit.completions.length;
   }, 0);
 
   const handleToggleCompletion = async (habit: Habit & { completions: HabitCompletion[] }) => {
@@ -133,13 +155,13 @@ export default function DashboardPage() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Achievements</CardTitle>
-            <span className="text-2xl">🏆</span>
+            <CardTitle className="text-sm font-medium">Total Completions</CardTitle>
+            <span className="text-2xl">✅</span>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalMilestones}</div>
+            <div className="text-2xl font-bold">{totalCompletions}</div>
             <p className="text-xs text-muted-foreground">
-              {totalMilestones === 0 ? "Earn achievements by reaching milestones" : "Milestones earned"}
+              {totalCompletions === 0 ? "Complete habits to track progress" : "All-time completions"}
             </p>
           </CardContent>
         </Card>
@@ -235,6 +257,67 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
+      {/* Recent Expenses */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle>Recent Expenses</CardTitle>
+          <Link href="/expenses">
+            <Button variant="ghost" size="sm">
+              View All <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </CardHeader>
+        <CardContent>
+          {expenses.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-8 text-center">
+              <div className="mb-2 text-4xl">💰</div>
+              <p className="mb-4 text-sm text-muted-foreground">
+                No expenses yet. Start tracking your spending!
+              </p>
+              <Link href="/expenses/new">
+                <Button size="sm">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Expense
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {expenses.map((expense) => (
+                <Link key={expense.id} href="/expenses">
+                  <div className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{getCategoryIcon(expense.category)}</span>
+                      <div>
+                        <p className="font-medium">{expense.title}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {expense.category} • {new Date(expense.date).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">{formatCurrency(expense.amount)}</p>
+                      {expense.wasteFlag && (
+                        <Badge variant="destructive" className="text-xs">
+                          Waste
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+              {allExpenses.filter((e) => !e.deletedAt).length > 5 && (
+                <Link href="/expenses">
+                  <Button variant="ghost" size="sm" className="w-full">
+                    View {allExpenses.filter((e) => !e.deletedAt).length - 5} more expenses
+                  </Button>
+                </Link>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
       {/* Quick Actions */}
       <div className="grid gap-4 md:grid-cols-3">
         <Link href="/habits">
@@ -252,31 +335,31 @@ export default function DashboardPage() {
           </Card>
         </Link>
 
-        <Link href="/scorecard">
+        <Link href="/todos">
           <Card className="cursor-pointer transition-colors hover:bg-accent">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                📊 Scorecard
+                ✅ Todos
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                View your progress and analytics
+                Manage your tasks and to-dos
               </p>
             </CardContent>
           </Card>
         </Link>
 
-        <Link href="/achievements">
+        <Link href="/expenses">
           <Card className="cursor-pointer transition-colors hover:bg-accent">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                🏆 Achievements
+                💰 Expenses
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                See your earned milestones
+                Track and analyze your spending
               </p>
             </CardContent>
           </Card>

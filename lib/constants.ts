@@ -9,39 +9,6 @@ export const HABIT_COLORS = [
   { name: "Pink", value: "#ec4899", class: "bg-pink-500" },
 ];
 
-// Milestone definitions with progressive difficulty
-export const STREAK_MILESTONES = [
-  { key: "streak_1", value: 1, name: "First Step", emoji: "🔥", description: "You've started your journey!" },
-  { key: "streak_3", value: 3, name: "Getting Started", emoji: "⭐", description: "Three days strong!" },
-  { key: "streak_7", value: 7, name: "Building Momentum", emoji: "💪", description: "One week streak! You're on fire!" },
-  { key: "streak_21", value: 21, name: "Committed", emoji: "🎯", description: "Three weeks of dedication!" },
-  { key: "streak_30", value: 30, name: "One Month Strong", emoji: "🏆", description: "A full month of consistency!" },
-  { key: "streak_66", value: 66, name: "Habit Formed", emoji: "🧠", description: "Scientifically proven habit formation!" },
-  { key: "streak_100", value: 100, name: "Century Club", emoji: "💎", description: "100 days of excellence!" },
-  { key: "streak_365", value: 365, name: "Legend", emoji: "👑", description: "A full year! You're legendary!" },
-];
-
-export const COMPLETION_MILESTONES = [
-  { key: "total_10", value: 10, name: "Getting Started", emoji: "🌟", description: "First 10 completions!" },
-  { key: "total_50", value: 50, name: "Consistent", emoji: "🚀", description: "50 completions and counting!" },
-  { key: "total_100", value: 100, name: "Centurion", emoji: "💯", description: "100 completions achieved!" },
-  { key: "total_500", value: 500, name: "Power User", emoji: "⚡", description: "500 completions! Unstoppable!" },
-  { key: "total_1000", value: 1000, name: "Master", emoji: "🏅", description: "1000 completions! True mastery!" },
-];
-
-export const CONSISTENCY_MILESTONES = [
-  { key: "perfect_week", name: "Perfect Week", emoji: "✨", description: "All habits completed for 7 days!" },
-  { key: "perfect_month", name: "Perfect Month", emoji: "🌙", description: "All habits completed for 30 days!" },
-  { key: "comeback", name: "Comeback Champion", emoji: "💪", description: "Back after a break with 7 days strong!" },
-];
-
-export const GLOBAL_MILESTONES = [
-  { key: "habit_creator", name: "Habit Creator", emoji: "🎊", description: "Created your first habit!" },
-  { key: "multi_tracker", name: "Multi-Tracker", emoji: "📊", description: "Tracking 5+ habits!" },
-  { key: "perfectionist", name: "Perfectionist", emoji: "🎯", description: "100% completion for 30 days!" },
-  { key: "transformer", name: "Transformer", emoji: "🔄", description: "1000 total habit completions!" },
-];
-
 // Static fallback quotes (50+ motivational quotes)
 export const STATIC_QUOTES = [
   { quote: "The secret of getting ahead is getting started.", author: "Mark Twain" },
@@ -120,3 +87,70 @@ export const DAYS_OF_WEEK = [
   { value: 5, label: "Fri", fullLabel: "Friday" },
   { value: 6, label: "Sat", fullLabel: "Saturday" },
 ];
+
+// Expense categories with icons and colors
+export const EXPENSE_CATEGORIES = [
+  { value: "Food & Dining", label: "Food & Dining", icon: "🍽️", color: "#f97316" },
+  { value: "Groceries", label: "Groceries", icon: "🛒", color: "#84cc16" },
+  { value: "Transport", label: "Transport", icon: "🚗", color: "#3b82f6" },
+  { value: "Shopping", label: "Shopping", icon: "🛍️", color: "#ec4899" },
+  { value: "Entertainment", label: "Entertainment", icon: "🎬", color: "#a855f7" },
+  { value: "Bills & Utilities", label: "Bills & Utilities", icon: "💡", color: "#eab308" },
+  { value: "Healthcare", label: "Healthcare", icon: "🏥", color: "#ef4444" },
+  { value: "Education", label: "Education", icon: "📚", color: "#06b6d4" },
+  { value: "Travel", label: "Travel", icon: "✈️", color: "#8b5cf6" },
+  { value: "Personal Care", label: "Personal Care", icon: "💅", color: "#d946ef" },
+  { value: "Gifts", label: "Gifts", icon: "🎁", color: "#f43f5e" },
+  { value: "Investments", label: "Investments", icon: "📈", color: "#10b981" },
+  { value: "Other", label: "Other", icon: "📦", color: "#6b7280" },
+] as const;
+
+// Payment modes
+export const PAYMENT_MODES = [
+  { value: "Cash", label: "Cash", icon: "💵" },
+  { value: "Card", label: "Card", icon: "💳" },
+  { value: "UPI", label: "UPI", icon: "📱" },
+  { value: "Wallet", label: "Wallet", icon: "👛" },
+] as const;
+
+// Necessity levels
+export const NECESSITY_LEVELS = [
+  { value: "necessary", label: "Necessary", description: "Essential for daily living", color: "#10b981" },
+  { value: "avoidable", label: "Avoidable", description: "Could have been postponed", color: "#eab308" },
+  { value: "optional", label: "Optional", description: "Nice to have", color: "#f97316" },
+  { value: "luxury", label: "Luxury", description: "Premium/indulgent", color: "#a855f7" },
+] as const;
+
+// Savings potential
+export const SAVINGS_POTENTIAL = [
+  { value: "none", label: "None", description: "No savings possible", color: "#6b7280" },
+  { value: "low", label: "Low", description: "Minimal savings (< 10%)", color: "#84cc16" },
+  { value: "medium", label: "Medium", description: "Moderate savings (10-30%)", color: "#eab308" },
+  { value: "high", label: "High", description: "Significant savings (> 30%)", color: "#ef4444" },
+] as const;
+
+// Emotion tags
+export const EMOTION_TAGS = [
+  { value: "neutral", label: "Neutral", icon: "😐", color: "#6b7280" },
+  { value: "happy", label: "Happy", icon: "😊", color: "#10b981" },
+  { value: "stress", label: "Stress", icon: "😰", color: "#ef4444" },
+  { value: "impulse", label: "Impulse", icon: "⚡", color: "#f97316" },
+  { value: "celebration", label: "Celebration", icon: "🎉", color: "#a855f7" },
+  { value: "regret", label: "Regret", icon: "😔", color: "#64748b" },
+] as const;
+
+// Expense intents
+export const EXPENSE_INTENTS = [
+  { value: "survival", label: "Survival", description: "Basic needs", icon: "🏠" },
+  { value: "comfort", label: "Comfort", description: "Convenience & ease", icon: "🛋️" },
+  { value: "growth", label: "Growth", description: "Personal development", icon: "🌱" },
+  { value: "social", label: "Social", description: "Relationships & connections", icon: "👥" },
+  { value: "entertainment", label: "Entertainment", description: "Fun & leisure", icon: "🎮" },
+  { value: "status", label: "Status", description: "Image & prestige", icon: "👑" },
+] as const;
+
+// Recurring types
+export const RECURRING_TYPES = [
+  { value: "monthly", label: "Monthly" },
+  { value: "yearly", label: "Yearly" },
+] as const;

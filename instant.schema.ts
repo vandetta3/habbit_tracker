@@ -18,9 +18,12 @@ const graph = i.graph(
       frequency: i.string(), // 'daily' | 'weekly' | 'custom'
       customDays: i.json().optional(), // Array of numbers 0-6
       startDate: i.string(), // YYYY-MM-DD
+      when: i.string().optional(), // Time in 24hr format (HH:MM)
+      where: i.string().optional(), // Location/place
       isActive: i.boolean(),
       color: i.string(),
       icon: i.string(),
+      user: i.string(),
       createdAt: i.number(),
       updatedAt: i.number(),
     }),
@@ -31,20 +34,13 @@ const graph = i.graph(
       completedAt: i.number(),
     }),
 
-    // Milestones/Achievements
-    milestones: i.entity({
-      milestoneType: i.string(), // 'streak' | 'total_completions' | 'consistency' | 'comeback' | 'global'
-      milestoneKey: i.string(), // e.g., 'streak_7', 'total_100'
-      value: i.number(),
-      earnedAt: i.number(),
-      viewedAt: i.number().optional(),
-    }),
-
     // Todos
     todos: i.entity({
       title: i.string(),
+      description: i.string().optional(),
       status: i.string(), // 'pending' | 'done'
       dueDate: i.string().optional(), // YYYY-MM-DD
+      dueTime: i.string().optional(), // HH:MM in 24hr format
       priority: i.string(), // 'low' | 'medium' | 'high'
       createdAt: i.number(),
       completedAt: i.number().optional(),
@@ -66,6 +62,31 @@ const graph = i.graph(
       quote: i.string(),
       author: i.string(),
       fetchedAt: i.number(),
+    }),
+
+    // Expenses
+    expenses: i.entity({
+      title: i.string(),
+      amount: i.number(), // Stored in paise/cents for precision
+      currency: i.string(), // 'INR'
+      date: i.string(), // YYYY-MM-DD
+      category: i.string(), // ExpenseCategory enum
+      paymentMode: i.string(), // 'Cash' | 'Card' | 'UPI' | 'Wallet'
+      merchant: i.string().optional(),
+      notes: i.string().optional(),
+      // Behavioral tracking
+      necessityLevel: i.string(), // 'necessary' | 'avoidable' | 'optional' | 'luxury'
+      savingsPotential: i.string(), // 'none' | 'low' | 'medium' | 'high'
+      wasteFlag: i.boolean(),
+      valueScore: i.number(), // 1-5
+      emotionTag: i.string(), // 'neutral' | 'happy' | 'stress' | 'impulse' | 'celebration' | 'regret'
+      expenseIntent: i.string(), // 'survival' | 'comfort' | 'growth' | 'social' | 'entertainment' | 'status'
+      // Lifecycle
+      isRecurring: i.boolean(),
+      recurringType: i.string().optional(), // 'monthly' | 'yearly'
+      deletedAt: i.number().optional(), // Soft delete timestamp
+      createdAt: i.number(),
+      updatedAt: i.number(),
     }),
   },
   {
@@ -106,30 +127,6 @@ const graph = i.graph(
         label: "habitCompletions",
       },
     },
-    milestonesByHabit: {
-      forward: {
-        on: "milestones",
-        has: "one",
-        label: "habit",
-      },
-      reverse: {
-        on: "habits",
-        has: "many",
-        label: "milestones",
-      },
-    },
-    milestonesByUser: {
-      forward: {
-        on: "milestones",
-        has: "one",
-        label: "user",
-      },
-      reverse: {
-        on: "users",
-        has: "many",
-        label: "milestones",
-      },
-    },
     todosByUser: {
       forward: {
         on: "todos",
@@ -164,6 +161,18 @@ const graph = i.graph(
         on: "users",
         has: "many",
         label: "dailyQuotes",
+      },
+    },
+    expensesByUser: {
+      forward: {
+        on: "expenses",
+        has: "one",
+        label: "user",
+      },
+      reverse: {
+        on: "users",
+        has: "many",
+        label: "expenses",
       },
     },
   }
