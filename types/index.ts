@@ -29,6 +29,27 @@ export interface HabitCompletion {
   completedAt: number;
 }
 
+export type MilestoneType = "streak" | "total_completions" | "consistency" | "global";
+
+export interface MilestoneDefinition {
+  key: string;
+  type: MilestoneType;
+  value: number;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface Milestone {
+  id: string;
+  userId: string;
+  habitId?: string;
+  milestoneKey: string;
+  milestoneType: MilestoneType;
+  earnedAt: number;
+  createdAt: number;
+}
+
 export interface Todo {
   id: string;
   userId: string;

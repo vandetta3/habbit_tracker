@@ -154,3 +154,34 @@ export const RECURRING_TYPES = [
   { value: "monthly", label: "Monthly" },
   { value: "yearly", label: "Yearly" },
 ] as const;
+
+// Milestone definitions
+export const STREAK_MILESTONES = [
+  { key: "streak_3", type: "streak" as const, value: 3, title: "3 Day Streak", description: "Complete a habit for 3 consecutive days", icon: "🔥" },
+  { key: "streak_7", type: "streak" as const, value: 7, title: "Week Warrior", description: "Complete a habit for 7 consecutive days", icon: "⚡" },
+  { key: "streak_14", type: "streak" as const, value: 14, title: "Two Weeks Strong", description: "Complete a habit for 14 consecutive days", icon: "💪" },
+  { key: "streak_21", type: "streak" as const, value: 21, title: "Habit Former", description: "Complete a habit for 21 consecutive days", icon: "🌟" },
+  { key: "streak_30", type: "streak" as const, value: 30, title: "Month Master", description: "Complete a habit for 30 consecutive days", icon: "👑" },
+  { key: "streak_66", type: "streak" as const, value: 66, title: "Habit Legend", description: "Complete a habit for 66 consecutive days", icon: "🏆" },
+  { key: "streak_100", type: "streak" as const, value: 100, title: "Century Club", description: "Complete a habit for 100 consecutive days", icon: "💎" },
+] as const;
+
+export const COMPLETION_MILESTONES = [
+  { key: "total_10", type: "total_completions" as const, value: 10, title: "Getting Started", description: "Complete 10 habit tasks", icon: "🎯" },
+  { key: "total_25", type: "total_completions" as const, value: 25, title: "Quarter Century", description: "Complete 25 habit tasks", icon: "🌱" },
+  { key: "total_50", type: "total_completions" as const, value: 50, title: "Half Century", description: "Complete 50 habit tasks", icon: "🚀" },
+  { key: "total_100", type: "total_completions" as const, value: 100, title: "Centurion", description: "Complete 100 habit tasks", icon: "⭐" },
+  { key: "total_250", type: "total_completions" as const, value: 250, title: "Elite Performer", description: "Complete 250 habit tasks", icon: "🎖️" },
+  { key: "total_500", type: "total_completions" as const, value: 500, title: "Master", description: "Complete 500 habit tasks", icon: "🥇" },
+  { key: "total_1000", type: "total_completions" as const, value: 1000, title: "Grand Master", description: "Complete 1000 habit tasks", icon: "👑" },
+] as const;
+
+export const CONSISTENCY_MILESTONES = [
+  { key: "perfect_week", type: "consistency" as const, value: 7, title: "Perfect Week", description: "Complete all habits for 7 consecutive days", icon: "✨" },
+  { key: "comeback", type: "consistency" as const, value: 1, title: "Comeback King", description: "Return after a 30+ day break and complete 7 consecutive days", icon: "🎪" },
+] as const;
+
+export const GLOBAL_MILESTONES = [
+  { key: "first_habit", type: "global" as const, value: 1, title: "First Step", description: "Create your first habit", icon: "🌟" },
+  { key: "five_habits", type: "global" as const, value: 5, title: "Habit Builder", description: "Create 5 habits", icon: "🏗️" },
+] as const;
