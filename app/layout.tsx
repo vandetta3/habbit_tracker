@@ -5,8 +5,11 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Habit Builder - Track Your Daily Habits",
+  title: "Daily Stack - Track Your Daily Habits",
   description: "A powerful habit tracking app to help you build better habits and achieve your goals",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

@@ -1,4 +1,4 @@
-# Habit Builder
+# Daily Stack
 
 A production-ready habit tracking web application built with Next.js, InstantDB, and TailwindCSS.
 
@@ -33,7 +33,7 @@ A production-ready habit tracking web application built with Next.js, InstantDB,
 1. **Clone or navigate to the repository**
 
 ```bash
-cd Habit-builder
+cd Daily-Stack
 ```
 
 2. **Install dependencies**
@@ -113,7 +113,7 @@ Achievements are automatically earned when you hit milestones:
 ## Project Structure
 
 ```
-habit-builder/
+daily-stack/
 ├── app/                    # Next.js app directory
 │   ├── (auth)/            # Authentication pages
 │   ├── (protected)/       # Protected app pages

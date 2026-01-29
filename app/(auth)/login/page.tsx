@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/instant";
 import { Button } from "@/components/ui/button";
@@ -63,8 +64,17 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1 text-center">
-          <div className="mb-4 text-6xl">🎯</div>
-          <CardTitle className="text-3xl font-bold">Habit Builder</CardTitle>
+          <div className="mb-4 flex justify-center">
+            <Image 
+              src="/dailystacklogo.png" 
+              alt="Daily Stack" 
+              width={240} 
+              height={60}
+              className="h-16 w-auto"
+              priority
+            />
+          </div>
+          <CardTitle className="text-3xl font-bold">Daily Stack</CardTitle>
           <CardDescription>
             Track your habits, achieve your goals
           </CardDescription>

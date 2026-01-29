@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { db } from "@/lib/instant";
 import { User } from "lucide-react";
 
@@ -10,7 +11,14 @@ export function Topbar() {
     <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
       <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
         <div className="flex flex-1 items-center">
-          <h2 className="text-xl font-semibold lg:hidden">Habit Builder</h2>
+          <Image 
+            src="/dailystacklogo.png" 
+            alt="Daily Stack" 
+            width={140} 
+            height={32}
+            className="h-8 w-auto lg:hidden"
+            priority
+          />
         </div>
         <div className="flex items-center gap-x-4 lg:gap-x-6">
           {/* User menu */}

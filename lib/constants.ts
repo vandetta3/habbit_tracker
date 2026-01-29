@@ -183,5 +183,5 @@ export const CONSISTENCY_MILESTONES = [
 
 export const GLOBAL_MILESTONES = [
   { key: "first_habit", type: "global" as const, value: 1, title: "First Step", description: "Create your first habit", icon: "🌟" },
-  { key: "five_habits", type: "global" as const, value: 5, title: "Habit Builder", description: "Create 5 habits", icon: "🏗️" },
+  { key: "five_habits", type: "global" as const, value: 5, title: "Daily Stacker", description: "Create 5 habits", icon: "🏗️" },
 ] as const;

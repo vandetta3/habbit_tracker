@@ -1,4 +1,4 @@
-// Core type definitions for the Habit Builder app
+// Core type definitions for the Daily Stack app
 
 export type HabitFrequency = "daily" | "weekly" | "custom";
 export type TodoStatus = "pending" | "done";

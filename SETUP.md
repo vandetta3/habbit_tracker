@@ -20,7 +20,7 @@ npm install
 1. Go to [https://instantdb.com](https://instantdb.com)
 2. Sign up or log in
 3. Click "Create a new app"
-4. Give your app a name (e.g., "Habit Builder")
+4. Give your app a name (e.g., "Daily Stack")
 5. Copy your **App ID** (it looks like: `abc123-def456-ghi789`)
 
 ### 3. Update Environment Variables
