@@ -91,33 +91,89 @@ export function TimerStepInput({
             />
           </div>
           
-          {/* Duration */}
-          <div className="flex gap-2 items-end">
-            <div className="flex-1">
-              <Label htmlFor={`step-${step.id}-minutes`} className="text-xs">
-                Minutes
-              </Label>
-              <Input
-                id={`step-${step.id}-minutes`}
-                type="number"
-                min="0"
-                max="1440"
-                value={minutes}
-                onChange={handleMinutesChange}
-              />
-            </div>
-            <div className="flex-1">
-              <Label htmlFor={`step-${step.id}-seconds`} className="text-xs">
-                Seconds
-              </Label>
-              <Input
-                id={`step-${step.id}-seconds`}
-                type="number"
-                min="0"
-                max="59"
-                value={seconds}
-                onChange={handleSecondsChange}
-              />
+          {/* Duration with Mobile-Style Picker */}
+          <div className="space-y-2">
+            <Label className="text-xs">Duration</Label>
+            <div className="flex gap-2 items-center">
+              {/* Minutes */}
+              <div className="flex-1 flex items-center border rounded-lg bg-background">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    const newMinutes = Math.max(0, minutes - 1);
+                    onChange(step.id, "durationMs", newMinutes * 60000 + seconds * 1000);
+                  }}
+                  className="h-10 px-2"
+                >
+                  −
+                </Button>
+                <div className="flex-1 text-center">
+                  <Input
+                    id={`step-${step.id}-minutes`}
+                    type="number"
+                    min="0"
+                    max="1440"
+                    value={minutes}
+                    onChange={handleMinutesChange}
+                    className="text-center border-0 focus-visible:ring-0 text-lg font-semibold"
+                  />
+                  <div className="text-xs text-muted-foreground -mt-1">min</div>
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    const newMinutes = Math.min(1440, minutes + 1);
+                    onChange(step.id, "durationMs", newMinutes * 60000 + seconds * 1000);
+                  }}
+                  className="h-10 px-2"
+                >
+                  +
+                </Button>
+              </div>
+              
+              {/* Seconds */}
+              <div className="flex-1 flex items-center border rounded-lg bg-background">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    const newSeconds = Math.max(0, seconds - 1);
+                    onChange(step.id, "durationMs", minutes * 60000 + newSeconds * 1000);
+                  }}
+                  className="h-10 px-2"
+                >
+                  −
+                </Button>
+                <div className="flex-1 text-center">
+                  <Input
+                    id={`step-${step.id}-seconds`}
+                    type="number"
+                    min="0"
+                    max="59"
+                    value={seconds}
+                    onChange={handleSecondsChange}
+                    className="text-center border-0 focus-visible:ring-0 text-lg font-semibold"
+                  />
+                  <div className="text-xs text-muted-foreground -mt-1">sec</div>
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    const newSeconds = Math.min(59, seconds + 1);
+                    onChange(step.id, "durationMs", minutes * 60000 + newSeconds * 1000);
+                  }}
+                  className="h-10 px-2"
+                >
+                  +
+                </Button>
+              </div>
             </div>
           </div>
         </div>
