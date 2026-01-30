@@ -88,6 +88,59 @@ const graph = i.graph(
       createdAt: i.number(),
       updatedAt: i.number(),
     }),
+
+    // Timers
+    timers: i.entity({
+      name: i.string(),
+      description: i.string().optional(),
+      tags: i.json().optional(), // Array of strings
+      repeatEntireRoutine: i.number(),
+      createdAt: i.number(),
+      updatedAt: i.number(),
+    }),
+
+    // Timer Steps
+    timerSteps: i.entity({
+      label: i.string(),
+      durationMs: i.number(),
+      orderIndex: i.number(),
+      type: i.string(), // 'countdown'
+      color: i.string().optional(),
+      groupId: i.string().optional(),
+      createdAt: i.number(),
+    }),
+
+    // Timer Groups
+    timerGroups: i.entity({
+      name: i.string().optional(),
+      repeatCount: i.number(),
+      orderIndex: i.number(),
+      createdAt: i.number(),
+    }),
+
+    // User Sound Preferences (global defaults)
+    userSoundPreferences: i.entity({
+      soundProfile: i.string(), // 'OFF' | 'BEEP' | 'BEEP+VOICE'
+      warningCountdown: i.number(), // 0=OFF, or 1-30 seconds
+      startSound: i.boolean(),
+      endSound: i.boolean(),
+      stepChangeSound: i.boolean(),
+      volume: i.number(), // 0-100
+      updatedAt: i.number(),
+    }),
+
+    // Timer Sound Settings (per-timer overrides)
+    timerSoundSettings: i.entity({
+      soundProfile: i.string().optional(),
+      warningCountdown: i.number().optional(),
+      startSound: i.boolean().optional(),
+      endSound: i.boolean().optional(),
+      stepChangeSound: i.boolean().optional(),
+      volume: i.number().optional(),
+      voiceText: i.string().optional(), // max 120 chars
+      createdAt: i.number(),
+      updatedAt: i.number(),
+    }),
   },
   {
     // Define relationships between entities
@@ -173,6 +226,78 @@ const graph = i.graph(
         on: "users",
         has: "many",
         label: "expenses",
+      },
+    },
+    timersByUser: {
+      forward: {
+        on: "timers",
+        has: "one",
+        label: "user",
+      },
+      reverse: {
+        on: "users",
+        has: "many",
+        label: "timers",
+      },
+    },
+    stepsByTimer: {
+      forward: {
+        on: "timerSteps",
+        has: "one",
+        label: "timer",
+      },
+      reverse: {
+        on: "timers",
+        has: "many",
+        label: "steps",
+      },
+    },
+    groupsByTimer: {
+      forward: {
+        on: "timerGroups",
+        has: "one",
+        label: "timer",
+      },
+      reverse: {
+        on: "timers",
+        has: "many",
+        label: "groups",
+      },
+    },
+    stepsInGroup: {
+      forward: {
+        on: "timerSteps",
+        has: "one",
+        label: "group",
+      },
+      reverse: {
+        on: "timerGroups",
+        has: "many",
+        label: "stepsInGroup",
+      },
+    },
+    soundPrefsByUser: {
+      forward: {
+        on: "userSoundPreferences",
+        has: "one",
+        label: "user",
+      },
+      reverse: {
+        on: "users",
+        has: "one",
+        label: "soundPreferences",
+      },
+    },
+    soundSettingsByTimer: {
+      forward: {
+        on: "timerSoundSettings",
+        has: "one",
+        label: "timer",
+      },
+      reverse: {
+        on: "timers",
+        has: "one",
+        label: "soundSettings",
       },
     },
   }

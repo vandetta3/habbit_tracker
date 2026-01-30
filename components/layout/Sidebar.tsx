@@ -10,6 +10,7 @@ import {
   CheckSquare,
   FileText,
   Wallet,
+  Timer,
   LogOut,
 } from "lucide-react";
 import { db } from "@/lib/instant";
@@ -17,6 +18,7 @@ import { db } from "@/lib/instant";
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Habits", href: "/habits", icon: Target },
+  { name: "Timers", href: "/timers", icon: Timer },
   { name: "Todos", href: "/todos", icon: CheckSquare },
   { name: "Expenses", href: "/expenses", icon: Wallet },
   { name: "Notes", href: "/notes", icon: FileText },

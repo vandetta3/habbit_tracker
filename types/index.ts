@@ -219,3 +219,92 @@ export interface WeekdayWeekendComparison {
     average: number;
   };
 }
+
+// Timer types
+export type TimerStepType = "countdown";
+export type SoundProfile = "OFF" | "BEEP" | "BEEP+VOICE";
+
+export interface Timer {
+  id: string;
+  userId: string;
+  name: string;
+  description?: string;
+  tags?: string[];
+  repeatEntireRoutine: number;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface TimerStep {
+  id: string;
+  timerId: string;
+  label: string;
+  durationMs: number;
+  orderIndex: number;
+  type: TimerStepType;
+  color?: string;
+  groupId?: string;
+  createdAt: number;
+}
+
+export interface TimerGroup {
+  id: string;
+  timerId: string;
+  name?: string;
+  repeatCount: number;
+  orderIndex: number;
+  createdAt: number;
+}
+
+export interface UserSoundPreferences {
+  id: string;
+  userId: string;
+  soundProfile: SoundProfile;
+  warningCountdown: number;
+  startSound: boolean;
+  endSound: boolean;
+  stepChangeSound: boolean;
+  volume: number;
+  updatedAt: number;
+}
+
+export interface TimerSoundSettings {
+  id: string;
+  timerId: string;
+  soundProfile?: SoundProfile;
+  warningCountdown?: number;
+  startSound?: boolean;
+  endSound?: boolean;
+  stepChangeSound?: boolean;
+  volume?: number;
+  voiceText?: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface PlayableStep {
+  stepId: string;
+  label: string;
+  durationMs: number;
+  color?: string;
+  originalIndex: number;
+  iterationIndex: number;
+}
+
+export interface TimerRunState {
+  isRunning: boolean;
+  isPaused: boolean;
+  currentStepIndex: number;
+  remainingMs: number;
+  stepStartTimestamp: number;
+  totalSteps: number;
+}
+
+export interface MergedSoundSettings {
+  soundProfile: SoundProfile;
+  warningCountdown: number;
+  startSound: boolean;
+  endSound: boolean;
+  stepChangeSound: boolean;
+  volume: number;
+}

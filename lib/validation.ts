@@ -47,3 +47,42 @@ export const OTPSchema = z.object({
 });
 
 export type OTPFormData = z.infer<typeof OTPSchema>;
+
+// Timer validation schemas
+export const TimerStepSchema = z.object({
+  label: z.string().min(1, "Label is required").max(80, "Label must be less than 80 characters"),
+  durationMs: z.number().min(1000, "Duration must be at least 1 second").max(86400000, "Duration must be less than 24 hours"),
+  type: z.literal("countdown"),
+  color: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Invalid color format").optional(),
+  groupId: z.string().optional(),
+});
+
+export const TimerGroupSchema = z.object({
+  name: z.string().max(50, "Group name must be less than 50 characters").optional(),
+  repeatCount: z.number().min(1, "Repeat count must be at least 1").max(99, "Repeat count must be less than 99"),
+  stepIds: z.array(z.string()).min(1, "Group must have at least 1 step"),
+});
+
+export const TimerSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").max(80, "Name must be less than 80 characters"),
+  description: z.string().max(500, "Description must be less than 500 characters").optional(),
+  tags: z.array(z.string().max(30, "Tag must be less than 30 characters")).max(10, "Maximum 10 tags allowed").optional(),
+  repeatEntireRoutine: z.number().min(1, "Repeat count must be at least 1").max(99, "Repeat count must be less than 99").default(1),
+  steps: z.array(TimerStepSchema).min(1, "Timer must have at least 1 step"),
+  groups: z.array(TimerGroupSchema).optional(),
+});
+
+export const SoundSettingsSchema = z.object({
+  soundProfile: z.enum(["OFF", "BEEP", "BEEP+VOICE"]),
+  warningCountdown: z.number().min(0, "Warning countdown must be 0 or greater").max(30, "Warning countdown must be 30 seconds or less"),
+  startSound: z.boolean(),
+  endSound: z.boolean(),
+  stepChangeSound: z.boolean(),
+  volume: z.number().min(0, "Volume must be at least 0").max(100, "Volume must be at most 100"),
+  voiceText: z.string().max(120, "Voice text must be less than 120 characters").optional(),
+});
+
+export type TimerStepFormData = z.infer<typeof TimerStepSchema>;
+export type TimerGroupFormData = z.infer<typeof TimerGroupSchema>;
+export type TimerFormData = z.infer<typeof TimerSchema>;
+export type SoundSettingsFormData = z.infer<typeof SoundSettingsSchema>;

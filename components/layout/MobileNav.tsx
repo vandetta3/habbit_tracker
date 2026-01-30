@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Home, Target, CheckSquare, Wallet, Menu } from "lucide-react";
+import { Home, Target, CheckSquare, Wallet, Timer, Menu } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Habits", href: "/habits", icon: Target },
+  { name: "Timers", href: "/timers", icon: Timer },
   { name: "Todos", href: "/todos", icon: CheckSquare },
-  { name: "Expenses", href: "/expenses", icon: Wallet },
   { name: "More", href: "#", icon: Menu, isMenu: true },
 ];
 
