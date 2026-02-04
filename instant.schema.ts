@@ -141,6 +141,40 @@ const graph = i.graph(
       createdAt: i.number(),
       updatedAt: i.number(),
     }),
+
+    // Nutrition Tracking
+    nutritionEntries: i.entity({
+      caloriesIntake: i.number(),
+      proteinIntake: i.number(),
+      bodyWeight: i.number(),
+      sleepHours: i.number(),
+      waterIntake: i.number(),
+      date: i.string(), // YYYY-MM-DD
+      notes: i.string().optional(),
+      createdAt: i.number(),
+      updatedAt: i.number(),
+    }),
+
+    // Nutrition Profiles (user goals/settings)
+    nutritionProfiles: i.entity({
+      dailyCalorieTarget: i.number(),
+      dailyProteinTarget: i.number(),
+      dailyWaterTarget: i.number(),
+      dailySleepTarget: i.number(),
+      createdAt: i.number(),
+      updatedAt: i.number(),
+    }),
+
+    // Weekly Progress Images
+    weeklyImages: i.entity({
+      imageData: i.string(), // Base64 encoded
+      angle: i.string(), // 'front' | 'back' | 'left' | 'right'
+      weekNumber: i.number(), // ISO week number
+      year: i.number(),
+      caption: i.string().optional(),
+      date: i.string(), // YYYY-MM-DD
+      createdAt: i.number(),
+    }),
   },
   {
     // Define relationships between entities
@@ -298,6 +332,42 @@ const graph = i.graph(
         on: "timers",
         has: "one",
         label: "soundSettings",
+      },
+    },
+    nutritionEntriesByUser: {
+      forward: {
+        on: "nutritionEntries",
+        has: "one",
+        label: "user",
+      },
+      reverse: {
+        on: "users",
+        has: "many",
+        label: "nutritionEntries",
+      },
+    },
+    nutritionProfilesByUser: {
+      forward: {
+        on: "nutritionProfiles",
+        has: "one",
+        label: "user",
+      },
+      reverse: {
+        on: "users",
+        has: "one",
+        label: "nutritionProfile",
+      },
+    },
+    weeklyImagesByUser: {
+      forward: {
+        on: "weeklyImages",
+        has: "one",
+        label: "user",
+      },
+      reverse: {
+        on: "users",
+        has: "many",
+        label: "weeklyImages",
       },
     },
   }

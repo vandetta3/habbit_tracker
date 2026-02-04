@@ -308,3 +308,58 @@ export interface MergedSoundSettings {
   stepChangeSound: boolean;
   volume: number;
 }
+
+// Nutrition types
+export interface NutritionEntry {
+  id: string;
+  userId: string;
+  caloriesIntake: number;
+  proteinIntake: number;
+  bodyWeight: number;
+  sleepHours: number;
+  waterIntake: number;
+  date: string; // YYYY-MM-DD
+  notes?: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface NutritionProfile {
+  id: string;
+  userId: string;
+  dailyCalorieTarget: number;
+  dailyProteinTarget: number;
+  dailyWaterTarget: number;
+  dailySleepTarget: number;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export type ImageAngle = 'front' | 'back' | 'left' | 'right';
+
+export interface WeeklyImage {
+  id: string;
+  userId: string;
+  imageData: string; // Base64
+  angle: ImageAngle;
+  weekNumber: number;
+  year: number;
+  caption?: string;
+  date: string;
+  createdAt: number;
+}
+
+export interface NutritionAnalytics {
+  weightChange: number;
+  avgCalories: number;
+  avgProtein: number;
+  avgWater: number;
+  avgSleep: number;
+  calorieAdherence: number; // % meeting target
+  proteinConsistency: number;
+  startWeight: number;
+  currentWeight: number;
+  weeklyAvgWeight: number;
+}
+
+export type TimeRange = 'week' | 'month' | '3months' | '6months' | 'custom';

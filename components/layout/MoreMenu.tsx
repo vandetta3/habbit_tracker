@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { X, LogOut, User, FileText, Wallet } from "lucide-react";
+import { X, LogOut, User, FileText, Wallet, Apple } from "lucide-react";
 import { db } from "@/lib/instant";
 
 interface MoreMenuProps {
@@ -58,6 +58,12 @@ export function MoreMenu({ open, onClose }: MoreMenuProps) {
 
           {/* Menu Items */}
           <div className="px-6 py-4 space-y-2">
+            <Link href="/nutrition" onClick={onClose}>
+              <div className="flex w-full items-center gap-3 rounded-lg p-3 text-left text-sm font-medium hover:bg-accent transition-colors">
+                <Apple className="h-5 w-5 text-muted-foreground" />
+                <span>Nutrition</span>
+              </div>
+            </Link>
             <Link href="/notes" onClick={onClose}>
               <div className="flex w-full items-center gap-3 rounded-lg p-3 text-left text-sm font-medium hover:bg-accent transition-colors">
                 <FileText className="h-5 w-5 text-muted-foreground" />
