@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Camera } from "lucide-react";
 import { db } from "@/lib/instant";
 import { TimeRangeSelector } from "@/components/nutrition/TimeRangeSelector";
 import { WeightChart } from "@/components/nutrition/WeightChart";
